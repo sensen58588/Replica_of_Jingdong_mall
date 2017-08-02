@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.hxq.design.mapper.OrdersMapper">
+		<select id="dealingOrderById" parameterType="orders" resultType="orders">
+		select * from orders where orderId=#{orderId} and userName=#{userName} and flag=1
+		</select>
+		<update id="submitOrderById" parameterType="orders" >
+			update orders set flag=0 where orderId=#{orderId}
+		</update>
+		<select id="dealedOrderById" parameterType="orders" resultType="orders">
+		select * from orders where orderId=#{orderId} and flag=0
+		</select>
+		<insert id="createOrder" parameterType="orders">
+		insert into orders(orderId,userName,data,goodsId,number,money,userPhone,userAddress,flag) values(#{orderId},#{userName},#{data},#{goodsId},#{number},#{money},#{userPhone},#{userAddress},1)
+		
+		</insert>
+		
+		<select id="selectOrderInfo" parameterType="orders" resultType="orders">
+		select * from orders where userName=#{userName} and flag=0
+		
+		</select>
+		<delete id="deleteOrder" parameterType="orders">
+			delete from orders where orderId=#{orderId}
+		</delete>
+	</mapper>

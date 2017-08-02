@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.hxq.design.mapper.ShoppingCarMapper">
+
+	<insert id="addGoodsToMyCar" parameterType="shoppingCar" >
+			insert into shoppingcart values(#{goodsId},#{goodsPrice},#{shopNumber},#{userName},#{shopMoney},#{goodsName})
+		</insert>
+		<update id="addAgain" parameterType="shoppingCar" >
+			update shoppingcart set shopNumber =shopNumber + #{shopNUmber},shopMoney=shopMoney + #{shopMoney} where goodsId = #{goodsId} and userName = #{userName}
+		</update>
+		
+	<select id="selectShoppingCarByUserName" parameterType="shoppingCar" resultType="shoppingCar">
+		select * from shoppingcart where userName=#{userName}
+	</select>
+	
+	<update id="updateShoppingCarAddOne" parameterType="shoppingCar" >
+	update shoppingcart set shopNumber=#{shopNumber},shopMoney=#{shopMoney} where userName=#{userName} and goodsId=#{goodsId}
+	
+	</update>
+	<update id="updateShoppingCarDelOne" parameterType="shoppingCar" >
+	update shoppingcart set shopNumber=#{shopNumber},shopMoney=#{shopMoney} where userName=#{userName} and goodsId=#{goodsId}
+	</update>
+	<select id="selectShoppingCarByUnAndGd" parameterType="shoppingCar" resultType="shoppingCar">
+	 select * from shoppingcart where userName=#{userName} and goodsId=#{goodsId}
+	
+	</select>
+	<delete id="deleteGoods" parameterType="shoppingCar" >
+		delete from shoppingcart where shopNumber=0
+	
+	</delete>
+	<delete id="deleteDoneGoods" parameterType="shoppingCar">
+	delete from shoppingcart where userName=#{userName} and goodsId=#{goodsId}
+	</delete>
+	</mapper>

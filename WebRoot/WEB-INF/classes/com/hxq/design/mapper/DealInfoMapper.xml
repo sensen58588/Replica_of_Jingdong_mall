@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.hxq.design.mapper.DealInfoMapper">
+	<insert id="insertIntodealInfo" parameterType="dealInfo">
+	
+	insert into dealinfo values(#{dealDataYear},#{dealDataMonth},#{dealDataDay},#{dealNumber},#{dealMoney})
+	</insert>
+	<update id="updateDealInfo" parameterType="dealInfo">
+	update dealinfo set dealMoney=#{dealMoney},dealNumber=#{dealNumber} where dealDataYear=#{dealDataYear} and dealDataMonth=#{dealDataMonth} and dealDataDay=#{dealDataDay}
+	</update>
+	<select id="selectDealInfoByYear" parameterType="dealInfo" resultType="dealInfo">
+	select * from dealinfo where dealDataYear=#{dealDataYear}
+	</select>
+	<select id="selectDealInfoByMonth" parameterType="dealInfo" resultType="dealInfo">
+	select * from dealinfo where dealDataYear=#{dealDataYear} and dealDataMonth=#{dealDataMonth}
+	</select>
+	<select id="selectDealInfoByDay" parameterType="dealInfo" resultType="dealInfo">
+	select * from dealinfo where dealDataYear=#{dealDataYear} and dealDataMonth=#{dealDataMonth} and dealDataDay=#{dealDataDay}
+	</select>
+	
+	</mapper>

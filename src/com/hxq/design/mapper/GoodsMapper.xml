@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.hxq.design.mapper.GoodsMapper">
+	
+	<insert id="insterintoGoods" parameterType="goods">
+	insert into goodsinfo (goodsId,goodsName,goodsType,goodsPrice,goodsNumber,goodsPricePer,goodsText,goodsKey,flag)values(#{goodsId},#{goodsName},#{goodsType},#{goodsPrice},#{goodsNumber},#{goodsPricePer},#{goodsText},#{goodsKey},#{flag})
+	</insert>
+	
+	<select id="selectGoodsAllInfoById" parameterType="int" resultType="goods">
+	select * from goodsinfo where goodsId=#{goodsId}
+	</select>
+	
+	<select id="selectGoodsSomeInfoByLike" parameterType="String" resultType="goods">
+		select goodsId,goodsName,goodsPrice,goodsPic,flag from goodsinfo where goodsName like '%${value}%' or goodsKey like '%${value}%'
+	</select>
+	
+	<update id="updateGoodsNumber" parameterType="goods" >
+	 
+	  update goodsinfo set goodsOrderNum=goodsOrderNum + #{goodsOrderNum},goodsNumber=goodsNumber - #{goodsOrderNum} where goodsId=#{goodsId}
+
+	</update>
+	
+	<update id="updateGoodsInfo" parameterType="goods">
+	
+	update goodsinfo set goodsName=#{goodsName},goodsType=#{goodsType},goodsPrice=#{goodsPrice},goodsPricePer=#{goodsPricePer},goodsText=#{goodsText},goodsNumber=#{goodsNumber},goodsOrderNum=#{goodsOrderNum},goodsKey=#{goodsKey},flag=#{flag} where goodsId=#{goodsId}
+	
+	</update>
+	
+	<update id="uploadGoodsPic" parameterType="goods">
+	
+	update goodsinfo set goodsPic=#{goodsPic} where goodsId=#{goodsId}
+	</update>
+	</mapper>
